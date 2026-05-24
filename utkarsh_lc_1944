@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<int> canSeePersonsCount(vector<int>& heights) {
+        // nice3 question i dont need any fucking help
+        // this is a question of monotoniu stack
+        // trivial to O(n^2) mai hi hoga
+        //  we need to keep a stack for this!
+        stack<int> stk; // val
+        vector<int> result(heights.size());
+        // count to index return krke kara ja sakta hai
+        for (int i = heights.size() - 1; i >= 0; i--) {
+            int count = 0;
+            while (!stk.empty() && stk.top() < heights[i]) {
+                count++;
+                stk.pop();
+            }
+            if (!stk.empty())
+                count++;
+
+            result[i] = count;
+            stk.push(heights[i]);
+        }
+        return result;
+    }
+};
+}
