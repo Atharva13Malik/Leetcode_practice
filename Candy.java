@@ -1,0 +1,28 @@
+class Solution {
+    public int candy(int[] ratings) {
+        int n=ratings.length;
+        int ans[]=new int[n];
+        Arrays.fill(ans,1);
+
+        // left to right
+        for(int i=1;i<n;i++){
+            if(ratings[i]>ratings[i-1]){
+                ans[i]=1+ans[i-1];
+            }
+        }
+        
+        // Right to left pass
+        for(int i=n-2;i>=0;i--){
+            if(ratings[i]>ratings[i+1]){
+                ans[i]=Math.max(ans[i],ans[i+1]+1);
+            }
+        }
+
+        int result=0;
+        for(int x:ans){
+            result+=x;
+        }
+
+        return result;
+    }
+}
